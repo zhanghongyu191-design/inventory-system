@@ -2,6 +2,7 @@ const products = [
   { id: 1, name: "ノートPC", sku: "PC-001", quantity: 10 },
   { id: 2, name: "マウス", sku: "MS-001", quantity: 25 },
   { id: 3, name: "キーボード", sku: "KB-001", quantity: 8 },
+  { id: 4, name: "プリンター", sku: "PR-001", quantity: 5 },
 ];
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
             <h1 className="text-3xl font-bold text-gray-900">
               在庫管理システム
             </h1>
-            <p className="mt-2 text-gray-600">商品一覧</p>
+            <p className="mt-2 text-gray-600">現在の商品在庫を確認できます</p>
           </div>
 
           <button className="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700">
