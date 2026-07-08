@@ -29,6 +29,7 @@ export default function Home() {
                 <th className="px-6 py-4">商品名</th>
                 <th className="px-6 py-4">SKU</th>
                 <th className="px-6 py-4">在庫数</th>
+                <th className="px-6 py-4">在庫ステータス</th>
               </tr>
             </thead>
 
@@ -41,6 +42,9 @@ export default function Home() {
                   <td className="px-6 py-4 text-gray-600">{product.sku}</td>
                   <td className="px-6 py-4 text-gray-900">
                     {product.quantity}
+                  </td>
+                  <td className="px-6 py-4 text-gray-900">
+                    {product.quantity < 10 ? "在庫少" : "在庫あり"}
                   </td>
                 </tr>
               ))}
