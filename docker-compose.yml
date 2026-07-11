@@ -1,20 +1,19 @@
 services:
-  mysql:
-    image: mysql:8.4
-    container_name: inventory-mysql
+  postgres:
+    image: postgres:17
+    container_name: inventory-postgres
     restart: unless-stopped
 
     environment:
-      MYSQL_ROOT_PASSWORD: root123
-      MYSQL_DATABASE: inventory
-      MYSQL_USER: inventory
-      MYSQL_PASSWORD: inventory123
+      POSTGRES_DB: inventory
+      POSTGRES_USER: inventory
+      POSTGRES_PASSWORD: inventory123
 
     ports:
-      - "3307:3306"
+      - "5432:5432"
 
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
 
   app:
     build:
@@ -31,7 +30,7 @@ services:
     command: php artisan serve --host=0.0.0.0 --port=8000
 
     depends_on:
-      - mysql
+      - postgres
 
     ports:
       - "8000:8000"
@@ -70,4 +69,4 @@ services:
       - app
 
 volumes:
-  mysql_data:
+  postgres_data:
