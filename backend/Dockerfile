@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libpq-dev \
     libicu-dev \
+    libonig-dev \
     $PHPIZE_DEPS
 
 # 安装 Xdebug
@@ -18,7 +19,9 @@ RUN docker-php-ext-install \
     pdo_pgsql \
     pgsql \
     zip \
-    intl
+    intl \
+    mbstring \
+    bcmath
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
