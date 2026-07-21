@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libpq-dev \
     libicu-dev \
+    libonig-dev \
     $PHPIZE_DEPS
 
 # 安装 Xdebug
