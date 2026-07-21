@@ -1,57 +1,82 @@
-const products = [
-  { id: 1, name: "ノートPC", sku: "PC-001", quantity: 10 },
-  { id: 2, name: "マウス", sku: "MS-001", quantity: 25 },
-  { id: 3, name: "キーボード", sku: "KB-001", quantity: 8 },
-  { id: 4, name: "プリンター", sku: "PR-001", quantity: 5 },
-];
+async function getProducts() {
+  const res = await fetch("http://app:8000/api/products");
 
-export default function Home() {
+  return res.json();
+}
+
+
+export default async function ProductsPage() {
+
+  const products = await getProducts();
+
   return (
     <main className="min-h-screen bg-gray-100 p-8">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-8 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              在庫管理システム
-            </h1>
-            <p className="mt-2 text-gray-600">現在の商品在庫を確認できます</p>
-          </div>
 
-          <button className="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700">
-            ＋ 商品を追加
-          </button>
-        </div>
+      <div className="mx-auto max-w-5xl">
+
+        <h1 className="mb-8 text-3xl font-bold">
+          商品一覧
+        </h1>
+
 
         <div className="overflow-hidden rounded-xl bg-white shadow">
+
           <table className="w-full text-left">
-            <thead className="bg-gray-50 text-sm text-gray-600">
+
+            <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-4">商品名</th>
-                <th className="px-6 py-4">SKU</th>
-                <th className="px-6 py-4">在庫数</th>
-                <th className="px-6 py-4">在庫ステータス</th>
+                <th className="px-6 py-4">
+                  商品コード
+                </th>
+
+                <th className="px-6 py-4">
+                  日本語名
+                </th>
+
+                <th className="px-6 py-4">
+                  中文名
+                </th>
+
+                <th className="px-6 py-4">
+                  在庫数
+                </th>
+
               </tr>
             </thead>
 
+
             <tbody>
-              {products.map((product) => (
-                <tr key={product.id} className="border-t border-gray-200">
-                  <td className="px-6 py-4 font-medium text-gray-900">
-                    {product.name}
+
+              {products.map((product:any)=>(
+                <tr key={product.id} className="border-t">
+
+                  <td className="px-6 py-4">
+                    {product.product_code}
                   </td>
-                  <td className="px-6 py-4 text-gray-600">{product.sku}</td>
-                  <td className="px-6 py-4 text-gray-900">
-                    {product.quantity}
+
+                  <td className="px-6 py-4">
+                    {product.name_jp}
                   </td>
-                  <td className="px-6 py-4 text-gray-900">
-                    {product.quantity < 10 ? "在庫少" : "在庫あり"}
+
+                  <td className="px-6 py-4">
+                    {product.name_cn}
                   </td>
+
+                  <td className="px-6 py-4">
+                    {product.stock_quantity}
+                  </td>
+
                 </tr>
               ))}
+
             </tbody>
+
           </table>
+
         </div>
+
       </div>
+
     </main>
   );
 }
